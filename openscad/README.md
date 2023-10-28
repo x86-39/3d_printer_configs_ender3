@@ -4,3 +4,5 @@ I broke my Sprite Pro hot end cooling fan, so I made a model so it fits a 40mm f
 <img src="./creality_sprite_pro_40mm_fan_duct_render.png" align="left" title="Static colour" width="400" height="400" />
 <img src="./creality_sprite_pro_40mm_fan_duct.jpg" align="left" title="Static colour" width="400" height="400" />
 <br clear="left"/>
+
+You can download the model at the [Releases tab](https://github.com/diademiemi/3d_printer_configs_ender3/releases/tag/2023-10-28)
