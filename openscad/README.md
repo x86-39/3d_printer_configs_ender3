@@ -9,7 +9,7 @@ You can download the model at the [Releases tab](https://github.com/diademiemi/3
 
 
 # Creality Sprite Pro BLTouch Raiser
-The BLTouch I use was too low, it kept bumping into prints and especially the bed clips, so I made a model to raise it by 3.5 millimeters. This will offset the Z axis by 3.5 millimeters, X axis by 13.5 millimeters and Y axis by 0 millimeters.
+The BLTouch I use was too low, it kept bumping into prints and especially the bed clips, so I made a model to raise it by 3.6 millimeters. This will offset the Z axis by 3.5 millimeters, X axis by 13.5 millimeters and Y axis by 0 millimeters.
 
 <img src="./creality_sprite_pro_bltouch_raiser_render.png" align="left" title="Static colour" width="400" height="400" />
 <img src="./creality_sprite_pro_bltouch_raiser.jpg" align="left" title="Static colour" width="400" height="400" />
