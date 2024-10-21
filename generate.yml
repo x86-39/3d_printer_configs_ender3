@@ -1,0 +1,250 @@
+- name: Generate PrusaSlicer configs
+  hosts: localhost
+  vars:
+    speed_safe:
+      perimeter_speed: 60
+      small_perimeter_speed: 50
+      external_perimeter_speed: 60
+      infill_speed: 75
+      solid_infill_speed: 80
+      top_solid_infill_speed: 75
+      support_material_speed: 50
+      support_material_interface_speed: 50
+      bridge_speed: 30
+      gap_fill_speed: 80
+      ironing_speed: 50
+
+      overhang_speed_0: 10
+      overhang_speed_1: 20
+      overhang_speed_2: 30
+      overhang_speed_3: 50
+
+      travel_speed: 80
+      travel_speed_z: 5
+
+      first_layer_speed: 20
+
+      external_perimeter_acceleration: 500
+      perimeter_acceleration: 600
+      top_solid_infill_acceleration: 700
+      solid_infill_acceleration: 800
+      infill_acceleration: 700
+      bridge_acceleration: 600
+      first_layer_acceleration: 100
+      travel_acceleration: 700
+      default_acceleration: 700
+
+      max_print_speed: 80
+      max_volumetric_speed: 10
+    speed_fast:
+      perimeter_speed: 175
+      small_perimeter_speed: 140
+      external_perimeter_speed: 140
+      infill_speed: 200
+      solid_infill_speed: 150
+      top_solid_infill_speed: 150
+      support_material_speed: 75
+      support_material_interface_speed: 80
+      bridge_speed: 45
+      gap_fill_speed: 120
+      ironing_speed: 70
+
+      overhang_speed_0: 15
+      overhang_speed_1: 30
+      overhang_speed_2: 50
+      overhang_speed_3: 80
+
+      travel_speed: 200
+      travel_speed_z: 5
+
+      first_layer_speed: 20
+
+      external_perimeter_acceleration: 700
+      perimeter_acceleration: 900
+      top_solid_infill_acceleration: 700
+      solid_infill_acceleration: 900
+      infill_acceleration: 900
+      bridge_acceleration: 800
+      first_layer_acceleration: 500
+      travel_acceleration: 1400
+      default_acceleration: 1400
+
+      max_print_speed: 180
+      max_volumetric_speed: 15
+    toughness_prototype:
+      perimeters: 2
+      bottom_solid_layers: 1
+      top_solid_layers: 1
+      fill_density: 7
+      fill_pattern: rectilinear
+    toughness_standard:
+      perimeters: 3
+      bottom_solid_layers: 3
+      top_solid_layers: 3
+      fill_density: 15
+      fill_pattern: honeycomb
+    toughness_thick_walls:
+      perimeters: 5
+      bottom_solid_layers: 4
+      top_solid_layers: 4
+      fill_density: 15
+      fill_pattern: honeycomb
+    toughness_strong:
+      perimeters: 4
+      bottom_solid_layers: 3
+      top_solid_layers: 3
+      fill_density: 30
+      fill_pattern: honeycomb
+    toughness_solid:
+      perimeters: 5
+      bottom_solid_layers: 5
+      top_solid_layers: 5
+      fill_density: 70
+      fill_pattern: honeycomb
+    precision_fine:
+      layer_height: 0.12
+      first_layer_height: 0.2
+    precision_detailed:
+      layer_height: 0.2
+      first_layer_height: 0.25
+    precision_standard:
+      layer_height: 0.25
+      first_layer_height: 0.28
+    precision_chunky:
+      layer_height: 0.32
+      first_layer_height: 0.32
+
+  roles:
+  # Fine: 0
+  # Detailed: 1
+  # Standard: 2
+  # Chunky: 3
+
+  # Prototype: 0
+  # Standard: 1
+  # Thick walls: 2
+  # Strong: 3
+  # Solid: 4
+
+  # Safe: 0
+  # Fast: 1
+
+  # Fine - Prototype
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [000] P:Fine, T:Prototype, S:Safe",
+        precision: "{{ precision_fine }}", toughness: "{{ toughness_prototype }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [001] P:Fine, T:Prototype, S:Fast",
+        precision: "{{ precision_fine }}", toughness: "{{ toughness_prototype }}", speed: "{{ speed_fast }}" }
+
+  # Fine - Standard
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [010] P:Fine, T:Standard, S:Safe",
+        precision: "{{ precision_fine }}", toughness: "{{ toughness_standard }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [011] P:Fine, T:Standard, S:Fast",
+        precision: "{{ precision_fine }}", toughness: "{{ toughness_standard }}", speed: "{{ speed_fast }}" }
+
+  # Fine - Thick walls
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [020] P:Fine, T:Thick walls, S:Safe",
+        precision: "{{ precision_fine }}", toughness: "{{ toughness_thick_walls }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [021] P:Fine, T:Thick walls, S:Fast",
+        precision: "{{ precision_fine }}", toughness: "{{ toughness_thick_walls }}", speed: "{{ speed_fast }}" }
+
+  # Fine - Strong
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [030] P:Fine, T:Strong, S:Safe",
+        precision: "{{ precision_fine }}", toughness: "{{ toughness_strong }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [031] P:Fine, T:Strong, S:Fast",
+        precision: "{{ precision_fine }}", toughness: "{{ toughness_strong }}", speed: "{{ speed_fast }}" }
+
+  # Fine - Solid
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [040] P:Fine, T:Solid, S:Safe",
+        precision: "{{ precision_fine }}", toughness: "{{ toughness_solid }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [041] P:Fine, T:Solid, S:Fast",
+        precision: "{{ precision_fine }}", toughness: "{{ toughness_solid }}", speed: "{{ speed_fast }}" }
+
+  # Detailed - Prototype
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [100] P:Detailed, T:Prototype, S:Safe",
+        precision: "{{ precision_detailed }}", toughness: "{{ toughness_prototype }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [101] P:Detailed, T:Prototype, S:Fast",
+        precision: "{{ precision_detailed }}", toughness: "{{ toughness_prototype }}", speed: "{{ speed_fast }}" }
+
+  # Detailed - Standard toughness
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [110] P:Detailed, T:Standard, S:Safe",
+        precision: "{{ precision_detailed }}", toughness: "{{ toughness_standard }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [111] P:Detailed, T:Standard, S:Fast",
+        precision: "{{ precision_detailed }}", toughness: "{{ toughness_standard }}", speed: "{{ speed_fast }}" }
+
+  # Detailed - Thick walls
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [120] P:Detailed, T:Thick walls, S:Safe",
+        precision: "{{ precision_detailed }}", toughness: "{{ toughness_thick_walls }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [121] P:Detailed, T:Thick walls, S:Fast",
+        precision: "{{ precision_detailed }}", toughness: "{{ toughness_thick_walls }}", speed: "{{ speed_fast }}" }
+
+  # Detailed - Strong
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [130] P:Detailed, T:Strong, S:Safe",
+        precision: "{{ precision_detailed }}", toughness: "{{ toughness_strong }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [131] P:Detailed, T:Strong, S:Fast",
+        precision: "{{ precision_detailed }}", toughness: "{{ toughness_strong }}", speed: "{{ speed_fast }}" }
+
+  # Detailed - Solid
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [140] P:Detailed, T:Solid, S:Safe",
+        precision: "{{ precision_detailed }}", toughness: "{{ toughness_solid }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [141] P:Detailed, T:Solid, S:Fast",
+        precision: "{{ precision_detailed }}", toughness: "{{ toughness_solid }}", speed: "{{ speed_fast }}" }
+
+    # Standard - Prototype
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [200] P:Standard, T:Prototype, S:Safe",
+        precision: "{{ precision_standard }}", toughness: "{{ toughness_prototype }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [201] P:Standard, T:Prototype, S:Fast",
+        precision: "{{ precision_standard }}", toughness: "{{ toughness_prototype }}", speed: "{{ speed_fast }}" }
+
+    # Standard - Standard
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [210] P:Standard, T:Standard, S:Safe",
+        precision: "{{ precision_standard }}", toughness: "{{ toughness_standard }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [211] P:Standard, T:Standard, S:Fast",
+        precision: "{{ precision_standard }}", toughness: "{{ toughness_standard }}", speed: "{{ speed_fast }}" }
+
+    # Standard - Thick walls
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [220] P:Standard, T:Thick walls, S:Safe",
+        precision: "{{ precision_standard }}", toughness: "{{ toughness_thick_walls }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [221] P:Standard, T:Thick walls, S:Fast",
+        precision: "{{ precision_standard }}", toughness: "{{ toughness_thick_walls }}", speed: "{{ speed_fast }}" }
+
+    # Standard - Strong
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [230] P:Standard, T:Strong, S:Safe",
+        precision: "{{ precision_standard }}", toughness: "{{ toughness_strong }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [231] P:Standard, T:Strong, S:Fast",
+        precision: "{{ precision_standard }}", toughness: "{{ toughness_strong }}", speed: "{{ speed_fast }}" }
+
+    # Standard - Solid
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [240] P:Standard, T:Solid, S:Safe",
+        precision: "{{ precision_standard }}", toughness: "{{ toughness_solid }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [241] P:Standard, T:Solid, S:Fast",
+        precision: "{{ precision_standard }}", toughness: "{{ toughness_solid }}", speed: "{{ speed_fast }}" }
+
+    # Chunky - Prototype
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [300] P:Chunky, T:Prototype, S:Safe",
+        precision: "{{ precision_chunky }}", toughness: "{{ toughness_prototype }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [301] P:Chunky, T:Prototype, S:Fast",
+        precision: "{{ precision_chunky }}", toughness: "{{ toughness_prototype }}", speed: "{{ speed_fast }}" }
+
+    # Chunky - Standard
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [310] P:Chunky, T:Standard, S:Safe",
+        precision: "{{ precision_chunky }}", toughness: "{{ toughness_standard }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [311] P:Chunky, T:Standard, S:Fast",
+        precision: "{{ precision_chunky }}", toughness: "{{ toughness_standard }}", speed: "{{ speed_fast }}" }
+
+    # Chunky - Thick walls
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [320] P:Chunky, T:Thick walls, S:Safe",
+        precision: "{{ precision_chunky }}", toughness: "{{ toughness_thick_walls }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [321] P:Chunky, T:Thick walls, S:Fast",
+        precision: "{{ precision_chunky }}", toughness: "{{ toughness_thick_walls }}", speed: "{{ speed_fast }}" }
+
+    # Chunky - Strong
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [330] P:Chunky, T:Strong, S:Safe",
+        precision: "{{ precision_chunky }}", toughness: "{{ toughness_strong }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [331] P:Chunky, T:Strong, S:Fast",
+        precision: "{{ precision_chunky }}", toughness: "{{ toughness_strong }}", speed: "{{ speed_fast }}" }
+
+    # Chunky - Solid
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [340] P:Chunky, T:Solid, S:Safe",
+        precision: "{{ precision_chunky }}", toughness: "{{ toughness_solid }}", speed: "{{ speed_safe }}" }
+    - { role: generate_print, filename: "Creality Ender 3 Custom - [341] P:Chunky, T:Solid, S:Fast",
+        precision: "{{ precision_chunky }}", toughness: "{{ toughness_solid }}", speed: "{{ speed_fast }}" }

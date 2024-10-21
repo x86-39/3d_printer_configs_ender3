@@ -1,0 +1,5 @@
+- name: Generate ini file
+  ansible.builtin.template:
+    src: "Creality Ender 3 Custom - base.ini.j2"
+    dest: "{{ lookup('env', 'PWD') }}/PrusaSlicer/print/{{ filename }}.ini"
+    mode: '0644'
